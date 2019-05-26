@@ -16,17 +16,17 @@
 
 package com.example.android.architecture.blueprints.todoapp.data;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 
 import java.util.UUID;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 /**
  * Immutable model class for a Task.
@@ -50,15 +50,20 @@ public final class Task {
     @ColumnInfo(name = "completed")
     private final boolean mCompleted;
 
+    @ColumnInfo(name = "urgent")
+    private final boolean mUrgent;
+
+
     /**
      * Use this constructor to create a new active Task.
      *
      * @param title       title of the task
      * @param description description of the task
+     *
      */
     @Ignore
     public Task(@Nullable String title, @Nullable String description) {
-        this(title, description, UUID.randomUUID().toString(), false);
+        this(title, description, UUID.randomUUID().toString(), false, false);
     }
 
     /**
@@ -71,7 +76,7 @@ public final class Task {
      */
     @Ignore
     public Task(@Nullable String title, @Nullable String description, @NonNull String id) {
-        this(title, description, id, false);
+        this(title, description, id, false, false);
     }
 
     /**
@@ -82,8 +87,8 @@ public final class Task {
      * @param completed   true if the task is completed, false if it's active
      */
     @Ignore
-    public Task(@Nullable String title, @Nullable String description, boolean completed) {
-        this(title, description, UUID.randomUUID().toString(), completed);
+    public Task(@Nullable String title, @Nullable String description, boolean completed, boolean urgent) {
+        this(title, description, UUID.randomUUID().toString(), completed, urgent);
     }
 
     /**
@@ -96,11 +101,12 @@ public final class Task {
      * @param completed   true if the task is completed, false if it's active
      */
     public Task(@Nullable String title, @Nullable String description,
-                @NonNull String id, boolean completed) {
+                @NonNull String id, boolean completed, boolean urgent) {
         mId = id;
         mTitle = title;
         mDescription = description;
         mCompleted = completed;
+        mUrgent = urgent;
     }
 
     @NonNull
@@ -135,6 +141,8 @@ public final class Task {
         return !mCompleted;
     }
 
+    public boolean isUrgent() { return mUrgent; }
+
     public boolean isEmpty() {
         return Strings.isNullOrEmpty(mTitle) &&
                Strings.isNullOrEmpty(mDescription);
@@ -147,7 +155,8 @@ public final class Task {
         Task task = (Task) o;
         return Objects.equal(mId, task.mId) &&
                Objects.equal(mTitle, task.mTitle) &&
-               Objects.equal(mDescription, task.mDescription);
+               Objects.equal(mDescription, task.mDescription) &&
+               Objects.equal(mUrgent, task.mUrgent);
     }
 
     @Override

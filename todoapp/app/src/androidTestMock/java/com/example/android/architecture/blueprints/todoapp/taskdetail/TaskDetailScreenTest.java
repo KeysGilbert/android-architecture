@@ -56,15 +56,16 @@ public class TaskDetailScreenTest {
 
     private static String TASK_DESCRIPTION = "Rocks";
 
-    /**
-     * {@link Task} stub that is added to the fake service API layer.
-     */
-    private static Task ACTIVE_TASK = new Task(TASK_TITLE, TASK_DESCRIPTION, false);
 
     /**
      * {@link Task} stub that is added to the fake service API layer.
      */
-    private static Task COMPLETED_TASK = new Task(TASK_TITLE, TASK_DESCRIPTION, true);
+    private static Task ACTIVE_TASK = new Task(TASK_TITLE, TASK_DESCRIPTION, false, false);
+
+    /**
+     * {@link Task} stub that is added to the fake service API layer.
+     */
+    private static Task COMPLETED_TASK = new Task(TASK_TITLE, TASK_DESCRIPTION, true, false);
 
     /**
      * {@link ActivityTestRule} is a JUnit {@link Rule @Rule} to launch your activity under test.

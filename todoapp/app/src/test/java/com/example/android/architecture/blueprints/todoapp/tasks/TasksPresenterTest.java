@@ -73,7 +73,7 @@ public class TasksPresenterTest {
 
         // We start the tasks to 3, with one active and two completed
         TASKS = Lists.newArrayList(new Task("Title1", "Description1"),
-                new Task("Title2", "Description2", true), new Task("Title3", "Description3", true));
+                new Task("Title2", "Description2", true, false), new Task("Title3", "Description3", true, false));
     }
 
     @Test
@@ -179,7 +179,7 @@ public class TasksPresenterTest {
     @Test
     public void activateTask_ShowsTaskMarkedActive() {
         // Given a stubbed completed task
-        Task task = new Task("Details Requested", "For this task", true);
+        Task task = new Task("Details Requested", "For this task", true, false);
         mTasksPresenter.loadTasks(true);
 
         // When task is marked as activated
